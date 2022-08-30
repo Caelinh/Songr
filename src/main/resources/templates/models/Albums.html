@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Albums</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+
 </head>
+<header>Albums</header>
 <body>
-<h1>Hello World!!</h1>
+<p th:text="${Albums[0].toString()}" />
+<p th:text="${Albums[1].toString()}" />
+<p th:text="${Albums[2].toString()}" />
+
+
 </body>
 </html>
