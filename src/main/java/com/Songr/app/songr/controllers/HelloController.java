@@ -1,16 +1,23 @@
 package com.Songr.app.songr.controllers;
 
-import com.Songr.app.songr.Album;
+import com.Songr.app.songr.models.Album;
+import com.Songr.app.songr.repositories.AlbumsRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.List;
 
 
 @Controller
 public class HelloController {
-
+@Autowired
+    AlbumsRepo AlbumsRepo;
     @GetMapping("/hello")
     public String getHello(){
         return "Hello";
@@ -24,15 +31,22 @@ public class HelloController {
 
     @GetMapping("/albums")
     public String albums(Model m){
-        Album[] AlbumArray = new Album[3];
-        AlbumArray[0] = new Album("title1","artist1",5,300,"url1");
-        AlbumArray[1] = new Album("title2","artist2",6,350,"url2");
-        AlbumArray[2] = new Album("title3","artist3",7,560,"url3");
-
-        m.addAttribute("Albums", AlbumArray);
+        List<Album> albums = AlbumsRepo.findAll();
+        m.addAttribute("Albums", albums);
 
         return "models/Albums";
 
     }
+
+    @PostMapping("/albumsave")
+    public RedirectView createNewAlbum(String title, String artist, Integer songCount, Integer length, String imageUrl){
+        Album newAlbum = new Album(title,artist,songCount,length,imageUrl);
+        AlbumsRepo.save(newAlbum);
+        return new RedirectView("/albums");
+
+    }
+
+
+
 
 }
