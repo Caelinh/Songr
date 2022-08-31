@@ -1,19 +1,44 @@
-package com.Songr.app.songr;
+package com.Songr.app.songr.models;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+
+
+@Entity
 public class Album {
-
+@Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        long id;
+    @NotEmpty
     String title;
+    @NotEmpty
     String artist;
-    int songCount;
-    int length;
+    @NotEmpty
+    Integer songCount;
+    @NotEmpty
+    Integer length;
+    @NotEmpty
     String imageUrl;
 
-    public Album(String title, String artist, int songCount, int length, String imageUrl) {
+    protected Album(){}
+
+    public Album(String title, String artist, Integer songCount, Integer length, String imageUrl) {
         this.title = title;
         this.artist = artist;
         this.songCount = songCount;
         this.length = length;
         this.imageUrl = imageUrl;
+    }
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -32,7 +57,7 @@ public class Album {
         this.artist = artist;
     }
 
-    public int getSongCount() {
+    public Integer getSongCount() {
         return songCount;
     }
 
@@ -40,7 +65,7 @@ public class Album {
         this.songCount = songCount;
     }
 
-    public int getLength() {
+    public Integer getLength() {
         return length;
     }
 

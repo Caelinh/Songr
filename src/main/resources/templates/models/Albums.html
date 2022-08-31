@@ -11,10 +11,36 @@
 </head>
 <header>Albums</header>
 <body>
-<p th:text="${Albums[0].toString()}" />
-<p th:text="${Albums[1].toString()}" />
-<p th:text="${Albums[2].toString()}" />
+<main>
+    <div>
+        <form action="/albumsave" method="post">
+            <fieldset>
+                <legend>Add an album</legend>
+                <label> Album title</label>
+                <input type="text"  name="title" required='required' />
+                <label>Artist</label>
+                <input type="text"  name="artist" required='required' />
+                <label> Song Count</label>
+                <input type="text"  name="songCount" required='required'/>
+                <label> Album length</label>
+                <input type="text"  name="length" required='required' />
+                <label> Album Art url</label>
+                <input type="text"  name="imageUrl" required='required' />
+                <input type="submit" value="Add Album">
+            </fieldset>
+        </form>
+    </div>
 
+<div style="display:flex; justify-content: space-evenly; flex-direction: row;">
+    <div th:each="Album : ${Albums}">
+        <p th:text="'Album Title: ' + ${Album.title}"/>
+        <p     th:text="'Artist: ' + ${Album.artist}" />
+        <p    th:text="'Song count: ' + ${Album.songCount}"/>
+        <p    th:text="'Length in sec: ' + ${Album.length}"/>
+        <p    th:text="'Image url: ' + ${Album.imageUrl}"/>
+    </div>
+</div>
+</main>
 
 </body>
 </html>
