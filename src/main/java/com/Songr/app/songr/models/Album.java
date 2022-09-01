@@ -1,11 +1,8 @@
 package com.Songr.app.songr.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -13,17 +10,19 @@ public class Album {
 @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         long id;
-    @NotEmpty
+
     String title;
-    @NotEmpty
+
     String artist;
-    @NotEmpty
+
     Integer songCount;
-    @NotEmpty
+
     Integer length;
-    @NotEmpty
+
     String imageUrl;
 
+    @OneToMany(mappedBy="myAlbum")
+    List<Song> songsOnThisAlbum;
     protected Album(){}
 
     public Album(String title, String artist, Integer songCount, Integer length, String imageUrl) {
@@ -79,6 +78,14 @@ public class Album {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public List<Song> getSongsOnThisAlbum() {
+        return songsOnThisAlbum;
+    }
+
+    public void setSongsOnThisAlbum(List<Song> songsOnThisAlbum) {
+        this.songsOnThisAlbum = songsOnThisAlbum;
     }
 
     @Override
